@@ -1,0 +1,76 @@
+/* 主题样式 */
+
+/* 经典蓝主题 */
+:root[data-theme="classic"] {
+    --primary-color: #3498db;
+    --secondary-color: #2980b9;
+    --background-color: #f8f9fa;
+    --text-color: #2c3e50;
+    --card-back-color: linear-gradient(45deg, #3498db, #2980b9);
+    --card-front-color: #fff;
+    --border-color: #3498db;
+    --modal-bg: rgba(0, 0, 0, 0.8);
+    --modal-content-bg: #fff;
+}
+
+/* 暗夜黑主题 */
+:root[data-theme="dark"] {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --background-color: #1a1a1a;
+    --text-color: #ecf0f1;
+    --card-back-color: linear-gradient(45deg, #2c3e50, #34495e);
+    --card-front-color: #2c3e50;
+    --border-color: #34495e;
+    --modal-bg: rgba(0, 0, 0, 0.9);
+    --modal-content-bg: #2c3e50;
+}
+
+/* 森林绿主题 */
+:root[data-theme="forest"] {
+    --primary-color: #27ae60;
+    --secondary-color: #2ecc71;
+    --background-color: #f1f8e9;
+    --text-color: #1b5e20;
+    --card-back-color: linear-gradient(45deg, #27ae60, #2ecc71);
+    --card-front-color: #fff;
+    --border-color: #27ae60;
+    --modal-bg: rgba(0, 0, 0, 0.8);
+    --modal-content-bg: #f1f8e9;
+}
+
+/* 应用主题变量 */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.menu-button, .close-button {
+    background-color: var(--primary-color);
+    color: var(--card-front-color);
+}
+
+.menu-button:hover, .close-button:hover {
+    background-color: var(--secondary-color);
+}
+
+.card-back {
+    background: var(--card-back-color);
+}
+
+.card-front {
+    background: var(--card-front-color);
+    border-color: var(--border-color);
+}
+
+.modal {
+    background: var(--modal-bg);
+}
+
+.modal-content {
+    background: var(--modal-content-bg);
+}
+
+.theme-options label {
+    color: var(--text-color);
+}
