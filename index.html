@@ -1,131 +1,76 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>记忆卡片游戏 - 主菜单</title>
-    <link rel="stylesheet" href="menu.css">
-    <link rel="stylesheet" href="themes.css">
+    <title>记忆卡片游戏 - 主页</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="menu-container">
+    <div class="container">
         <h1>记忆卡片游戏</h1>
-        <div class="menu-content">
-            <div class="difficulty-selector">
-                <label for="difficulty">选择难度：</label>
-                <select id="difficulty">
-                    <option value="beginner">入门 (3x4)</option>
-                    <option value="easy">简单 (4x6)</option>
-                    <option value="hard">困难 (6x8)</option>
-                    <option value="hell">炼狱 (8x9)</option>
-                    <option value="challenge">挑战 (动态)</option>
+        <div class="game-settings">
+            <div class="setting-group">
+                <label for="theme-select">选择主题</label>
+                <select id="theme-select" class="select-box">
+                    <option value="classic">经典蓝</option>
+                    <option value="dark">暗夜黑</option>
+                    <option value="forest">森林绿</option>
                 </select>
             </div>
-            <button id="startGameBtn" class="menu-button">开始游戏</button>
-            <button id="settingsBtn" class="menu-button">设置</button>
-            <button id="achievementsBtn" class="menu-button">成就列表</button>
-            <button id="rulesBtn" class="menu-button">游戏规则</button>
-        </div>
-
-        <!-- 设置弹窗 -->
-        <div id="settingsModal" class="modal">
-            <div class="modal-content">
-                <h2>游戏设置</h2>
-                <div class="settings-content">
-                    <div class="theme-selector">
-                        <h3>主题选择</h3>
-                        <div class="theme-options">
-                            <label>
-                                <input type="radio" name="theme" value="classic" checked>
-                                经典蓝
-                            </label>
-                            <label>
-                                <input type="radio" name="theme" value="dark">
-                                暗夜黑
-                            </label>
-                            <label>
-                                <input type="radio" name="theme" value="forest">
-                                森林绿
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <button class="close-button">关闭</button>
+            <div class="setting-group">
+                <label for="difficulty-select">选择难度</label>
+                <select id="difficulty-select" class="select-box">
+                    <option value="beginner">入门模式 (3×4 网格，12张卡片)</option>
+                    <option value="easy">简单模式 (4×6 网格，24张卡片)</option>
+                    <option value="hard">困难模式 (6×8 网格，48张卡片)</option>
+                    <option value="hell">炼狱模式 (8×9 网格，72张卡片)</option>
+                    <option value="challenge">挑战模式 (动态难度)</option>
+                </select>
             </div>
+            <button id="start-game" class="start-btn">开始游戏</button>
+            <button id="show-rules" class="rules-btn">游戏规则</button>
         </div>
+    </div>
 
-        <!-- 成就列表弹窗 -->
-        <div id="achievementsModal" class="modal">
-            <div class="modal-content">
-                <h2>成就列表</h2>
-                <div class="achievements-list">
-                    <div class="achievement">
-                        <h3>速战速决</h3>
-                        <p>在60秒内完成一局游戏</p>
-                        <div class="achievement-status" data-achievement="speed">未解锁</div>
-                    </div>
-                    <div class="achievement">
-                        <h3>完美记忆</h3>
-                        <p>一局游戏中没有翻错任何卡片</p>
-                        <div class="achievement-status" data-achievement="perfect">未解锁</div>
-                    </div>
-                    <div class="achievement">
-                        <h3>炼狱勇士</h3>
-                        <p>在炼狱难度下获胜</p>
-                        <div class="achievement-status" data-achievement="hell">未解锁</div>
-                    </div>
-                    <div class="achievement">
-                        <h3>连击大师</h3>
-                        <p>连续匹配成功5次</p>
-                        <div class="achievement-status" data-achievement="combo">未解锁</div>
-                    </div>
-                    <div class="achievement">
-                        <h3>时间挑战者</h3>
-                        <p>在剩余60秒以上时完成困难难度</p>
-                        <div class="achievement-status" data-achievement="time">未解锁</div>
-                    </div>
-                    <div class="achievement">
-                        <h3>特效收集者</h3>
-                        <p>在一局游戏中使用所有特殊卡片效果</p>
-                        <div class="achievement-status" data-achievement="special">未解锁</div>
-                    </div>
+    <!-- 游戏规则弹框 -->
+    <div id="rules-modal" class="modal">
+        <div class="modal-content rules-modal-content">
+            <h2>游戏规则</h2>
+            <div class="rules-content">
+                <div class="rule-group">
+                    <h3>基本规则</h3>
+                    <ul>
+                        <li>点击卡片将其翻转</li>
+                        <li>每次可以翻转两张卡片</li>
+                        <li>找出所有相同的卡片对</li>
+                        <li>如果匹配成功，卡片保持翻开</li>
+                        <li>如果不匹配，卡片会自动翻回</li>
+                        <li>在规定时间内完成配对获得胜利</li>
+                    </ul>
                 </div>
-                <button class="close-button">关闭</button>
-            </div>
-        </div>
-
-        <!-- 游戏规则弹窗 -->
-        <div id="rulesModal" class="modal">
-            <div class="modal-content">
-                <h2>游戏规则</h2>
-                <div class="rules-content">
-                    <h3>基本规则：</h3>
+                <div class="rule-group">
+                    <h3>难度说明</h3>
                     <ul>
-                        <li>点击卡片将其翻转，找出所有相同的卡片对。</li>
-                        <li>每次可以翻转两张卡片，如果匹配成功则保持翻开状态。</li>
-                        <li>如果不匹配，卡片会自动翻回。</li>
-                        <li>找出所有卡片对即可获胜。</li>
+                        <li>入门模式：3×4 网格，12张卡片，适合初学者</li>
+                        <li>简单模式：4×6 网格，24张卡片，稍有挑战</li>
+                        <li>困难模式：6×8 网格，48张卡片，考验记忆</li>
+                        <li>炼狱模式：8×9 网格，72张卡片，极限挑战</li>
+                        <li>挑战模式：从2×2开始，通关后逐步增加难度</li>
                     </ul>
-
-                    <h3>难度说明：</h3>
+                </div>
+                <div class="rule-group">
+                    <h3>特殊道具</h3>
                     <ul>
-                        <li>入门：适合初学者，12张卡片</li>
-                        <li>简单：标准难度，24张卡片</li>
-                        <li>困难：进阶难度，48张卡片</li>
-                        <li>炼狱：专家难度，72张卡片</li>
-                        <li>挑战：动态难度，初始12张卡片，每完成一轮匹配后增加4张新卡片，且翻牌时间会逐渐缩短</li>
-                    </ul>
-
-                    <h3>特殊卡片：</h3>
-                    <ul>
-                        <li>💡 提示卡：随机翻开一张卡片</li>
+                        <li>💡 提示卡：随机显示一张卡片2秒</li>
                         <li>⌛ 时间卡：增加30秒游戏时间</li>
                     </ul>
                 </div>
-                <button class="close-button">关闭</button>
             </div>
+            <button id="close-rules" class="control-btn">关闭</button>
         </div>
     </div>
-    <script src="menu.js"></script>
+
+    <script src="script.js"></script>
 </body>
-</html>
+</html> 

@@ -1,3 +1,29 @@
+:root {
+    --primary-color: #2196f3;
+    --secondary-color: #1976d2;
+    --background-color: #f5f5f5;
+    --card-color: #ffffff;
+    --text-color: #333333;
+}
+
+/* 暗夜黑主题 */
+[data-theme="dark"] {
+    --primary-color: #424242;
+    --secondary-color: #212121;
+    --background-color: #121212;
+    --card-color: #333333;
+    --text-color: #ffffff;
+}
+
+/* 森林绿主题 */
+[data-theme="forest"] {
+    --primary-color: #4caf50;
+    --secondary-color: #388e3c;
+    --background-color: #e8f5e9;
+    --card-color: #ffffff;
+    --text-color: #1b5e20;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,208 +32,434 @@
 
 body {
     font-family: 'Microsoft YaHei', sans-serif;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background-color: var(--background-color);
+    color: var(--text-color);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    transition: all 0.3s ease;
 }
 
-.game-container {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 100%;
+.container, .game-container {
     max-width: 800px;
-}
-
-header {
+    width: 95%;
+    padding: 1rem;
     text-align: center;
-    margin-bottom: 20px;
 }
 
 h1 {
-    color: #2c3e50;
-    margin-bottom: 15px;
-    font-size: 2em;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
 }
 
-.game-info {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 15px;
+.theme-selector {
+    margin-bottom: 2rem;
 }
 
-.score, .time {
-    font-size: 1.2em;
-    color: #34495e;
-    padding: 5px 15px;
-    background: #f8f9fa;
-    border-radius: 8px;
-}
-
-.controls button {
-    padding: 8px 20px;
-    font-size: 1em;
-    border: none;
-    border-radius: 5px;
-    background: #3498db;
+.theme-btn, .difficulty-btn, .control-btn, .special-btn {
+    background-color: var(--primary-color);
     color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    margin: 0.5rem;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s ease;
-    margin: 0 5px;
+    transition: all 0.3s ease;
 }
 
-.controls button:hover {
-    background: #2980b9;
+.theme-btn:hover, .difficulty-btn:hover, .control-btn:hover, .special-btn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+.difficulty-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.difficulty-btn {
+    text-decoration: none;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.setting-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+}
+
+.select-box {
+    padding: 0.8rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    background-color: var(--card-color);
+    color: var(--text-color);
+    font-size: 1rem;
+    cursor: pointer;
+    outline: none;
+}
+
+.select-box:focus {
+    border-color: var(--secondary-color);
+}
+
+.start-btn, .rules-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.start-btn {
+    margin-top: 1rem;
+}
+
+.rules-btn {
+    margin-top: 0.5rem;
+}
+
+.start-btn:hover, .rules-btn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
 }
 
 .game-board {
     display: grid;
-    gap: 10px;
-    margin: 20px 0;
-    perspective: 1000px;
-}
-
-.game-board.beginner {
-    grid-template-columns: repeat(4, 1fr);
+    gap: 0.25rem;
+    margin: 1rem auto;
+    width: 95%;
     max-width: 600px;
-}
-
-.game-board.easy {
-    grid-template-columns: repeat(6, 1fr);
-    max-width: 700px;
-}
-
-.game-board.hard {
-    grid-template-columns: repeat(8, 1fr);
-    max-width: 800px;
-}
-
-.game-board.hell {
-    grid-template-columns: repeat(9, 1fr);
-    max-width: 900px;
+    aspect-ratio: 4/3;
+    background-color: var(--background-color);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .card {
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.6s;
+    aspect-ratio: 2/3;
+    width: 100%;
+    height: 100%;
+    background-color: var(--card-color);
+    border-radius: 8px;
     cursor: pointer;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
 }
 
-.game-board.beginner .card {
-    height: 120px;
+/* 调整不同难度下的卡片大小 */
+[data-mode="beginner"] .game-board {
+    max-width: 400px;
 }
 
-.game-board.easy .card {
-    height: 100px;
+[data-mode="easy"] .game-board {
+    max-width: 500px;
 }
 
-.game-board.hard .card {
-    height: 80px;
+[data-mode="hard"] .game-board,
+[data-mode="hell"] .game-board {
+    max-width: 600px;
 }
 
-.game-board.hell .card {
-    height: 60px;
+[data-mode="beginner"] .card {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+[data-mode="easy"] .card {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+}
+
+[data-mode="hard"] .card {
+    font-size: clamp(0.8rem, 2vw, 1.5rem);
+}
+
+[data-mode="hell"] .card {
+    font-size: clamp(0.6rem, 1.5vw, 1.2rem);
 }
 
 .card.flipped {
     transform: rotateY(180deg);
 }
 
-.card-face {
+.card-front, .card-back {
     position: absolute;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    border-radius: 10px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 2em;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .card-front {
-    background: #fff;
-    transform: rotateY(180deg);
-    border: 2px solid #3498db;
+    background-color: var(--primary-color);
+    color: white;
 }
 
 .card-back {
-    background: linear-gradient(45deg, #3498db, #2980b9);
-    color: white;
+    background-color: var(--card-color);
+    transform: rotateY(180deg);
 }
 
-.special-card .card-front {
-    border-color: #e74c3c;
-    background: linear-gradient(45deg, #fff5f5, #ffe6e6);
+.game-header {
+    max-width: 600px;
+    margin: 0 auto 1rem;
+    padding: 0 1rem;
 }
 
-.game-status {
+.special-cards {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.special-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.game-info {
+    display: flex;
+    gap: 1rem;
+}
+
+.modal {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
     justify-content: center;
     align-items: center;
-    z-index: 1000;
 }
 
-.status-content {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
+.modal-content {
+    background-color: var(--card-color);
+    padding: 2rem;
+    border-radius: 8px;
     text-align: center;
 }
 
-.status-content h2 {
-    color: #2c3e50;
-    margin-bottom: 15px;
-}
-
-.status-content p {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-}
-
-#playAgainBtn {
-    padding: 10px 25px;
-    font-size: 1.1em;
-    background: #2ecc71;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-#playAgainBtn:hover {
-    background: #27ae60;
-}
-
-@media (max-width: 600px) {
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .game-header {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
     .game-board {
-        grid-template-columns: repeat(3, 1fr);
+        gap: 0.2rem;
+        padding: 0.5rem;
+    }
+    
+    [data-mode="beginner"] .game-board {
+        max-width: 350px;
+    }
+    
+    [data-mode="easy"] .game-board {
+        max-width: 450px;
+    }
+    
+    [data-mode="hard"] .game-board,
+    [data-mode="hell"] .game-board {
+        max-width: 500px;
     }
 
-    .card {
-        height: 100px;
+    [data-mode="beginner"] .card {
+        font-size: clamp(1.2rem, 3vw, 2rem);
     }
-
-    h1 {
-        font-size: 1.5em;
+    
+    [data-mode="easy"] .card {
+        font-size: clamp(1rem, 2.5vw, 1.8rem);
     }
-
-    .game-info {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
+    
+    [data-mode="hard"] .card {
+        font-size: clamp(0.7rem, 1.8vw, 1.3rem);
+    }
+    
+    [data-mode="hell"] .card {
+        font-size: clamp(0.5rem, 1.5vw, 1rem);
+    }
+    
+    .special-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
     }
 }
+
+@media (max-width: 480px) {
+    .container, .game-container {
+        padding: 0.5rem;
+    }
+    
+    .game-board {
+        gap: 0.15rem;
+        padding: 0.3rem;
+        width: 98%;
+    }
+    
+    [data-mode="beginner"] .game-board {
+        max-width: 300px;
+    }
+    
+    [data-mode="easy"] .game-board {
+        max-width: 350px;
+    }
+    
+    [data-mode="hard"] .game-board,
+    [data-mode="hell"] .game-board {
+        max-width: 400px;
+    }
+
+    [data-mode="beginner"] .card {
+        font-size: clamp(1rem, 2.5vw, 1.8rem);
+    }
+    
+    [data-mode="easy"] .card {
+        font-size: clamp(0.8rem, 2vw, 1.5rem);
+    }
+    
+    [data-mode="hard"] .card {
+        font-size: clamp(0.6rem, 1.5vw, 1.2rem);
+    }
+    
+    [data-mode="hell"] .card {
+        font-size: clamp(0.4rem, 1.2vw, 0.9rem);
+    }
+    
+    .game-header {
+        padding: 0 0.5rem;
+    }
+    
+    .special-cards {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .start-btn, .rules-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+.rules-section {
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.rules-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.rules-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    background-color: var(--card-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.rule-group {
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: var(--background-color);
+}
+
+.rule-group h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+}
+
+.rule-group ul {
+    list-style: none;
+    padding-left: 1rem;
+}
+
+.rule-group li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    line-height: 1.4;
+}
+
+.rule-group li::before {
+    content: "•";
+    color: var(--primary-color);
+    position: absolute;
+    left: -1rem;
+}
+
+@media (max-width: 768px) {
+    .rules-content {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .rule-group {
+        padding: 0.8rem;
+    }
+}
+
+.rules-modal-content {
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.rules-modal-content .rules-content {
+    margin: 1.5rem 0;
+}
+
+.rules-modal-content .control-btn {
+    margin-top: 1rem;
+}
+
+@media (max-width: 480px) {
+    .rules-modal-content {
+        width: 95%;
+        padding: 1rem;
+    }
+    
+    .rules-modal-content .rules-content {
+        margin: 1rem 0;
+    }
+} 

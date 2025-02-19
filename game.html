@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,28 +8,33 @@
 </head>
 <body>
     <div class="game-container">
-        <header>
-            <h1>记忆卡片游戏</h1>
+        <div class="game-header">
             <div class="game-info">
-                <div class="score">得分: <span id="score">0</span></div>
-                <div class="time">时间: <span id="time">03:00</span></div>
+                <div class="timer">⏱️ <span id="time">00:00</span></div>
+                <div class="moves">🔄 步数: <span id="moves">0</span></div>
             </div>
-            <div class="controls">
-                <button id="startBtn">开始游戏</button>
-                <button id="restartBtn" style="display: none;">重新开始</button>
+            <div class="special-cards">
+                <button id="hint-card" class="special-btn">💡 提示卡</button>
+                <button id="time-card" class="special-btn">⌛ 时间卡</button>
             </div>
-        </header>
-        <main class="game-board" id="gameBoard">
+        </div>
+        <div id="game-board" class="game-board">
             <!-- 卡片将通过 JavaScript 动态生成 -->
-        </main>
-        <div class="game-status" id="gameStatus" style="display: none;">
-            <div class="status-content">
-                <h2>游戏结束</h2>
-                <p>最终得分: <span id="finalScore">0</span></p>
-                <button id="playAgainBtn">再玩一次</button>
-            </div>
+        </div>
+        <div class="game-controls">
+            <button id="restart" class="control-btn">重新开始</button>
+            <a href="index.html" class="control-btn">返回主页</a>
+        </div>
+    </div>
+    <div id="win-modal" class="modal">
+        <div class="modal-content">
+            <h2>恭喜获胜！</h2>
+            <p>用时: <span id="final-time">00:00</span></p>
+            <p>步数: <span id="final-moves">0</span></p>
+            <button id="play-again" class="control-btn">再玩一次</button>
+            <a href="index.html" class="control-btn">返回主页</a>
         </div>
     </div>
     <script src="script.js"></script>
 </body>
-</html>
+</html> 
